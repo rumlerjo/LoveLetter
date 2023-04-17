@@ -1,4 +1,4 @@
-from card import Card
+from game.classes.cards.card import Card
 from typing import Optional
 from game.classes.player import Player
 
@@ -13,9 +13,11 @@ class Guard(Card):
         return "guard.png"
 
     def react(self, opponent: Player, guess: Optional[int] = None) -> None:
+        if guess is None or guess == 0:
+            return
         cards = opponent.getHand().getCards()
         for card in cards:
             if card.rank() == guess:
-                cards.remove(card)
+                opponent.getHand().removeCard(card)
                 break
 

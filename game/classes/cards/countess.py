@@ -1,4 +1,4 @@
-from card import Card
+from game.classes.cards.card import Card
 
 class Countess(Card):
     def __init__(self) -> None:

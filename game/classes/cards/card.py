@@ -1,8 +1,9 @@
-from typing import List, TypeVar, Optional, Union
-from game.classes.hand import Hand
-from game.classes.player import Player
+from typing import List, TypeVar, Optional
+
+Player = TypeVar("Player")
 
 Card = TypeVar("Card")
+Hand = TypeVar("Hand")
 
 class Card:
     """
@@ -34,16 +35,17 @@ class Card:
     def __repr__(self) -> str:
         return str(self)
 
-    def react(self, opponent: Player, guess: Optional[int] = None) -> None:
+    def react(self, opponent: Player, guess: Optional[int] = None) -> Optional[Hand]:
         return None
     
-    def discard(self) -> None:
+    def discard(self) -> Card:
         """
         Activate discard effects
         """
-        return None
+        self.setOwner(None)
+        return self
 
-    def setOwner(self, newOwner: Player) -> None:
+    def setOwner(self, newOwner: Optional[Player]) -> None:
         self.__owner = newOwner
 
     def removeOwner(self) -> None:

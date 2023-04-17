@@ -1,4 +1,4 @@
-from card import Card
+from game.classes.cards.card import Card
 from game.classes.player import Player
 from typing import Optional
 
@@ -14,4 +14,11 @@ class King(Card):
     
     def react(self, opponent: Player, guess: Optional[int] = None) -> None:
         opponent.__hand, self.__owner.__hand = self.__owner.__hand, opponent.__hand
+        
+        for card in self.getOwner().getHand().getCards():
+            card.setOwner(self.getOwner())
+        
+        for card in opponent.getHand().getCards():
+            card.setOwner(opponent)
+
     
